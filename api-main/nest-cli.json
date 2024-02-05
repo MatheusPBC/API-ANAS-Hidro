@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/api/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/api",
+  "projects": {
+    "api": {
+      "type": "application",
+      "root": "apps/api",
+      "entryFile": "main",
+      "sourceRoot": "apps/api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api/tsconfig.app.json"
+      }
+    },
+    "users": {
+      "type": "application",
+      "root": "apps/users",
+      "entryFile": "main",
+      "sourceRoot": "apps/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/users/tsconfig.app.json"
+      }
+    },
+    "ana": {
+      "type": "application",
+      "root": "apps/ana",
+      "entryFile": "main",
+      "sourceRoot": "apps/ana/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ana/tsconfig.app.json"
+      }
+    },
+    "cron": {
+      "type": "application",
+      "root": "apps/cron",
+      "entryFile": "main",
+      "sourceRoot": "apps/cron/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cron/tsconfig.app.json"
+      }
+    },
+    "mail": {
+      "type": "application",
+      "root": "apps/mail",
+      "entryFile": "main",
+      "sourceRoot": "apps/mail/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mail/tsconfig.app.json"
+      }
+    },
+    "integrated": {
+      "type": "application",
+      "root": "apps/integrated",
+      "entryFile": "main",
+      "sourceRoot": "apps/integrated/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/integrated/tsconfig.app.json"
+      }
+    },
+    "xml": {
+      "type": "application",
+      "root": "apps/xml",
+      "entryFile": "main",
+      "sourceRoot": "apps/xml/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/xml/tsconfig.app.json"
+      }
+    },
+    "stations": {
+      "type": "application",
+      "root": "apps/stations",
+      "entryFile": "main",
+      "sourceRoot": "apps/stations/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stations/tsconfig.app.json"
+      }
+    }
+  }
+}

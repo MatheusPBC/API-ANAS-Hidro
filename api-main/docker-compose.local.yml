@@ -1,0 +1,86 @@
+version: "3"
+volumes:
+  md_data:
+
+
+networks:
+  default:
+    name: mongodb_network
+services:
+  traefik:
+    image: traefik:v2.6
+    container_name: "traefik"
+    volumes:
+      - ./traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "81:80"
+      - "8080:8080"
+  mongodb:
+    image: mongo
+    container_name: "mongodb"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    volumes:
+      - md_data:/data/db
+    ports:
+      - "27017:27017"
+  ana:
+    build:
+      context: .
+    container_name: "ana"
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+    expose:
+      - "3000"
+  api:
+    build:
+      context: .
+    container_name: "api"
+    restart: always
+    networks:
+      - default
+    expose:
+      - "3000"
+  cron:
+    build:
+      context: .
+    container_name: "cron"
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+    networks:
+      - default
+    expose:
+      - "3000"
+  integrated:
+    build:
+      context: .
+    container_name: "integrated"
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+    expose:
+      - "3000"
+  stations:
+    build:
+      context: .
+    container_name: "stations"
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+    expose:
+      - "3000"
+  users:
+    build:
+      context: .
+    container_name: "users"
+    restart: always
+    environment:
+      - ME_CONFIG_MONGODB_URL=${ME_CONFIG_MONGODB_URL}
+    expose:
+      - "3000"
